@@ -1,4 +1,4 @@
-# `qdl` is an [OPEN Open Source Project](http://openopensource.org/)
+# `qdownload` is an [OPEN Open Source Project](http://openopensource.org/)
 
 -----------------------------------------
 

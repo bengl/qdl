@@ -1,5 +1,5 @@
 {
-  "name": "qdl",
+  "name": "qdownload",
   "version": "0.0.1",
   "description": "qdd's downloader",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bengl/qdl.git"
+    "url": "git+https://github.com/bengl/qdownload.git"
   },
   "keywords": [
     "install",
@@ -22,9 +22,9 @@
   "author": "Bryan English <bryan@bryanenglish.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bengl/qdl/issues"
+    "url": "https://github.com/bengl/qdownload/issues"
   },
-  "homepage": "https://github.com/bengl/qdl#readme",
+  "homepage": "https://github.com/bengl/qdownload#readme",
   "files": [
     "index.js",
     "lib/*.js"
