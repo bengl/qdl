@@ -14,16 +14,16 @@ const qfastfsSha = 'sha512-4FySBpNMnrDULzycXH6JmCImjWRWUTzqrnnqhkrbTExcmcn2Zt' +
   'A9ZftAY8qYiVFGGkLBfrozCjEzAY3sB2Y84Q==';
 
 const qfastfsTree = {
-  'LICENSE.txt': 1080,
-  'README.md': 810,
-  'index.js': 202,
+  'LICENSE.txt': [0o100644, 1080],
+  'README.md': [0o100644, 810],
+  'index.js': [0o100755, 202],
   lib: {
-    'cp.js': 1838,
-    'general.js': 1383,
-    'mkdirp.js': 794,
-    'util.js': 184
+    'cp.js': [0o100644, 1838],
+    'general.js': [0o100644, 1383],
+    'mkdirp.js': [0o100644, 794],
+    'util.js': [0o100644, 184]
   },
-  'package.json': 1004
+  'package.json': [0o100644, 1004]
 };
 
 test`cache only`(async () => {
@@ -81,7 +81,7 @@ async function tree (dir) {
     if (stats.isDirectory()) {
       result[item] = await tree(fullItem);
     } else {
-      result[item] = stats.size;
+      result[item] = [stats.mode, stats.size];
     }
   }
   return result;
