@@ -2,6 +2,7 @@
 
 const { deepStrictEqual: deq, ok } = require('assert');
 const path = require('path');
+const os = require('os');
 const pifall = require('pifall');
 const { qdownloadAsync: qdownload } = pifall({ qdownload: require('./index.js') });
 const fs = pifall(require('fs'));
@@ -27,7 +28,7 @@ const qfastfsTree = {
 };
 
 test`cache only`(async () => {
-  const cacheDir = path.join(__dirname, 'testcache1');
+  const cacheDir = await getTestDir();
   await qdownload(qfastfsUrl, qfastfsSha, cacheDir, null);
   const cacheTree = await tree(cacheDir);
   deq(qfastfsTree, cacheTree);
@@ -35,7 +36,7 @@ test`cache only`(async () => {
 });
 
 test`dest only`(async () => {
-  const destDir = path.join(__dirname, 'testdest1');
+  const destDir = await getTestDir();
   await qdownload(qfastfsUrl, qfastfsSha, null, destDir);
   const destTree = await tree(destDir);
   deq(qfastfsTree, destTree);
@@ -43,8 +44,8 @@ test`dest only`(async () => {
 });
 
 test`both`(async () => {
-  const cacheDir = path.join(__dirname, 'testcache2');
-  const destDir = path.join(__dirname, 'testdest2');
+  const cacheDir = await getTestDir();
+  const destDir = await getTestDir();
   await qdownload(qfastfsUrl, qfastfsSha, cacheDir, destDir);
   const destTree = await tree(destDir);
   deq(qfastfsTree, destTree);
@@ -55,7 +56,7 @@ test`both`(async () => {
 });
 
 test`integrity fail`(async () => {
-  const cacheDir = path.join(__dirname, 'testcache3');
+  const cacheDir = await getTestDir();
   let err;
   try {
     await qdownload(qfastfsUrl, 'sha1-ReN/s56No/JbruP/U2niu18iAXo=', cacheDir, null);
@@ -85,4 +86,8 @@ async function tree (dir) {
     }
   }
   return result;
+}
+
+async function getTestDir () {
+  return fs.mkdtempAsync(path.join(os.tmpdir(), 'qdownload-'));
 }
